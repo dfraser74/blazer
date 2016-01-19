@@ -58,14 +58,14 @@ module Blazer
         rows = []
 
         comment = "blazer"
-        if options[:user].respond_to?(:id)
+        if options[:user]
           comment << ",user_id:#{options[:user].id}"
         end
         if options[:user].respond_to?(Blazer.user_name)
           # only include letters, numbers, and spaces to prevent injection
           comment << ",user_name:#{options[:user].send(Blazer.user_name).to_s.gsub(/[^a-zA-Z0-9 ]/, "")}"
         end
-        if options[:query].respond_to?(:id)
+        if options[:query]
           comment << ",query_id:#{options[:query].id}"
         end
 
@@ -76,7 +76,7 @@ module Blazer
             result.each do |untyped_row|
               row = {}
               untyped_row.each do |k, v|
-                row[k] = result.column_types.empty? ? v : result.column_types[k].send(:type_cast, v)
+                row[k] = v #result.column_types.empty? ? v : result.column_types[k].send(:type_cast, v)
               end
               rows << row
             end

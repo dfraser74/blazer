@@ -58,7 +58,7 @@ module Blazer
       @only_chart = params[:only_chart]
 
       if @success
-        @query = Query.find_by(id: params[:query_id]) if params[:query_id]
+        @query = Query.find (params[:query_id]) if params[:query_id]
 
         data_source = params[:data_source]
         data_source = @query.data_source if @query && @query.data_source
