@@ -154,7 +154,7 @@ module Blazer
         @query = Blazer::Query.new
         @query.creator = blazer_user if @query.respond_to?(:creator)
       end
-      if @query.update(query_params)
+      if @query.update_attributes(query_params)
         redirect_to query_path(@query, variable_params)
       else
         render :edit

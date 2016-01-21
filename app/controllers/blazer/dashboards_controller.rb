@@ -94,7 +94,7 @@ module Blazer
               dashboard_query.save!
             end
             if dashboard.persisted?
-              dashboard.dashboard_queries.where.not(query_id: query_ids).destroy_all
+              dashboard.dashboard_queries.where('query_id NOT IN (?)', query_ids).destroy_all
             end
           end
           true
